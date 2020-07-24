@@ -8,20 +8,14 @@ from prettytable import PrettyTable
 
 import eval
 
+import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Bidirectional, Dense, TimeDistributed
+from tensorflow.keras.layers import LSTM, Bidirectional, Dense, TimeDistributed, Concatenate
 from tensorflow.keras.layers import Attention
 from tensorflow.keras import Input, Model
 from data_loader import get_loader
 
-"""model = Sequential()
-model.add(LSTM(256, input_shape = (320,1024)))
-model.add(RepeatVector(320))
-model.add(LSTM(256, return_sequences = True))
-model.add(TimeDistributed(Dense(320, activation = 'softmax')))
-model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])"""
-
-class BuildModel(object):
+class BuildModel():
 
     def __init__(self, config = None, train_loader = None, test_dataset = None):
 
@@ -41,20 +35,28 @@ class BuildModel(object):
 
         encoder_inputs = Input(shape = (320, 1024))
 
-        encoder_BidirectionalLSTM = Bidirectional(LSTM(128, return_sequences = True))
-        encoder_out = encoder_BidirectionalLSTM(encoder_inputs)
+        encoder_BidirectionalLSTM = Bidirectional(LSTM(128, return_sequences = True, return_state = True))
+        encoder_out, fh, fc, bh, bc = encoder_BidirectionalLSTM(encoder_inputs)
+        sh = Concatenate()([fh, bh])
+        ch = Concatenate()([fc, bc])
+        encoder_states = [sh, ch]
 
         decoder_LSTM = LSTM(256, return_sequences = True)
-        decoder_out = decoder_LSTM(encoder_out)
+        decoder_out = decoder_LSTM(encoder_out, initial_state = encoder_states)
 
-        attn_layer = Attention(use_scale = True)
+        attn_layer = Attention(name="Attention_Layer")
         attn_out =  attn_layer([encoder_out, decoder_out])
 
+        decoder_concat_input = Concatenate(axis = -1, name = 'concat_layer')([decoder_out, attn_out])
+
         dense = TimeDistributed(Dense(1, activation = 'softmax'))
-        decoder_pred = dense(attn_out)
+        decoder_pred = dense(decoder_concat_input)
 
         model = Model(inputs = encoder_inputs, outputs = decoder_pred)
-        model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
+
+        opt = tf.keras.optimizers.Adam(learning_rate=0.15)
+
+        model.compile(loss = 'binary_crossentropy', optimizer = opt, metrics = ['accuracy'])
         model.summary()
 
         self.model = model
@@ -62,11 +64,11 @@ class BuildModel(object):
         t = trange(self.config.n_epochs, desc = 'Epoch', ncols = 90)
         for epoch_i in t:
 
-            model.fit_generator(generator = self.train_loader)
+            model.fit(self.train_loader)
 
             ckpt_path = self.config.save_dir + '/epoch-{}.ckpt'.format(epoch_i)
             tqdm.write("Save parameters at {}".format(ckpt_path))
-            model.save_weights('ckpt_path')
+            model.save_weights(ckpt_path)
             self.evaluate(epoch_i)
 
     def evaluate(self, epoch_i):
