@@ -1,11 +1,26 @@
-# Video-Summarization-Using-Attention
-Video summarization is a challenging problem with great application potential. Whereas prior approaches, largely unsupervised in nature, focus on sampling useful frames and assembling them as summaries, this implementation considers video summarization as a supervised subset selection problem. This problem of supervised video summarization is tackled by formulating it as a sequence-to-sequence learning problem, where the input is a sequence of original video frames, the output is a keyshot sequence. Extensive experiments are conducted on two video summarization benchmark datasets, i.e., SumMe, and TVSum.
-# Dataset
-TVSum and SumMe datasets (downsampled to 320 frames) and preprocessed by extracting the features from the last pooling layer of the  GoogleNet Model are used (hd5 file). Python Script for preparing the datasets will be uploaded shortly.
-# Train
-Config.py file contains the paths to the datasets. Make sure to change the paths to where your datasets are saved, and run
-`python train.py`<br />
+# Video Summarization using Attention
+
+Video Summarization is a challenging problem with wide potential. Prior approaches in this field focussed on sampling useful frames and assembling them as summaries. Also most of them were unsupervised approaches.
+
+### Video Summarization as a Supervised Subset Selection Problem
+
+This implementation considers Video Summarization as a _supervised subset selection_ problem. Formulated as a _sequence - to - sequence learning_ problem, Video Summarization has the input as a sequence of original video frames and output as the keyshot sequence. This model was experimented on the TVSum dataset.
+
+Link to the dataset :
+[TVSum](https://drive.google.com/file/d/1SfImsAvUpT_HsiqdEmeyYipQUnFFlDbV/view?usp=sharing)
+
+### Training the model
+
+Modify the config file with the path of the dataset. And run,
+`
+python train.py
+`
+
 For every epoch, the model weights will be saved and these will be used while creating the summary of a test video. Evaluation results will be automatically printed on your screen while the model is being trained.
-# Generate Summary
-To generate the summary of a video, run <br />
-`python gen_summary.py --h5_path --json_path --data_root --save_dir --bar`
+
+### Generating Summary
+
+To generate the summary of a video, run
+```
+python gen_summary.py --h5_path --json_path --data_root --save_dir --bar
+```
