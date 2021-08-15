@@ -2,14 +2,14 @@
 
 Video Summarization is a challenging problem with wide potential. Prior approaches in this field focussed on sampling useful frames and assembling them as summaries. Also most of them were unsupervised approaches.
 
-### Video Summarization as a Supervised Subset Selection Problem
+## Video Summarization as a Supervised Subset Selection Problem
 
 This implementation considers Video Summarization as a _supervised subset selection_ problem. Formulated as a _sequence - to - sequence learning_ problem, Video Summarization has the input as a sequence of original video frames and output as the keyshot sequence. This model was experimented on the TVSum dataset.
 
 Link to the dataset :
 [TVSum](https://drive.google.com/file/d/1SfImsAvUpT_HsiqdEmeyYipQUnFFlDbV/view?usp=sharing)
 
-### Training the model
+## Training the model
 
 Modify the config file with the path of the dataset. And run,
 `
@@ -18,7 +18,7 @@ python train.py
 
 For every epoch, the model weights will be saved and these will be used while creating the summary of a test video. Evaluation results will be automatically printed on your screen while the model is being trained.
 
-### Generating Summary
+## Generating Summary
 
 To generate the summary of a video, run
 ```
