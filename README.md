@@ -6,7 +6,7 @@ Video Summarization is a challenging problem with wide potential. Prior approach
 
 This implementation considers Video Summarization as a _supervised subset selection_ problem. Formulated as a _sequence - to - sequence learning_ problem, Video Summarization has the input as a sequence of original video frames and output as the keyshot sequence. This model was experimented on the TVSum dataset.
 
-Link to the dataset :
+Link to the preprocessed dataset :
 [TVSum](https://drive.google.com/file/d/1SfImsAvUpT_HsiqdEmeyYipQUnFFlDbV/view?usp=sharing)
 
 ## Training the model
