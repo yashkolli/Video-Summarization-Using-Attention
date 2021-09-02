@@ -9,6 +9,12 @@ This implementation considers Video Summarization as a _supervised subset select
 Link to the preprocessed dataset :
 [TVSum](https://drive.google.com/file/d/1SfImsAvUpT_HsiqdEmeyYipQUnFFlDbV/view?usp=sharing)
 
+## Model
+
+The framework consists of two components: an encoder-decoder model and a keyshot selection model. The encoder-decoder part measures the importance of each frame. The key shots selection model helps us to convert frame-level importance scores into shot-level scores and generating summary accounting to the threshold budget which we specify.
+
+More details of the model can be known by skimming through the code.
+
 ## Training the model
 
 Modify the config file with the path of the dataset. And run,
