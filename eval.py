@@ -1,6 +1,6 @@
 import numpy as np
+from utils import knapsack
 
-from knapsack import knapsack
 
 def eval_metrics(y_pred, y_true):
 
@@ -13,6 +13,7 @@ def eval_metrics(y_pred, y_true):
         fscore = 2 * precision * recall / (precision + recall)
 
     return [precision, recall, fscore]
+
 
 def select_keyshots(video_info, pred_score):
 
@@ -30,6 +31,7 @@ def select_keyshots(video_info, pred_score):
 
     return pred_score.tolist(), selected, key_labels.tolist()
 
+
 def upsample(down_arr, vidlen):
 
     up_arr = np.zeros(vidlen)
@@ -37,7 +39,7 @@ def upsample(down_arr, vidlen):
     l = (vidlen - ratio * 320) // 2
     i = 0
     while i < 320:
-        up_arr[l:l+ratio] = np.ones(ratio, dtype = int) * down_arr[0][i]
+        up_arr[l:l+ratio] = np.ones(ratio, dtype=int) * down_arr[0][i]
         l += ratio
         i += 1
 
