@@ -14,7 +14,7 @@ The original datasets are preprocessed. The codes for both TVSum and SumMe are g
 
 The framework consists of two components: an encoder-decoder model and a keyshot selection model. The encoder-decoder part measures the importance of each frame. The key shots selection model helps us to convert frame-level importance scores into shot-level scores and generating summary accounting to the threshold budget which we specify.
 
-More details of the model can be known by skimming through the code.
+More details of the model can be known by skimming through the code. There are different implementations of the same framework in the code. The *model - 4* and *model - 5* are **attentive models**. They employ *Additive Attention* and *Multiplicative Attention* respectively.
 
 ## Training the model
 
