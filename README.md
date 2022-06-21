@@ -10,6 +10,12 @@ This implementation considers Video Summarization as a _supervised subset select
 
 The original datasets are preprocessed. The codes for both TVSum and SumMe are given in *tvsum_md.py* and *summe_md.py* files respectively. The videos are uniformly downsampled to 320 frames. And KTS algorithm is used to get the change points. The detailed preprocessing algorithms and processes can be understood by referring to the code.
 
+## Model
+
+The framework consists of two components: an encoder-decoder model and a keyshot selection model. The encoder-decoder part measures the importance of each frame. The key shots selection model helps us to convert frame-level importance scores into shot-level scores and generating summary accounting to the threshold budget which we specify.
+
+More details of the model can be known by skimming through the code.
+
 ## Training the model
 
 Modify the config file with the path of the dataset. And run,
