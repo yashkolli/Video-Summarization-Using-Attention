@@ -8,7 +8,7 @@ This implementation considers Video Summarization as a _supervised subset select
 
 ## Dataset Preprocessing
 
-The original datasets are preprocessed. The codes for both TVSum and SumMe are given in *tvsum_md.py* and *summe_md.py* files respectively. The videos are uniformly downsampled to 320 frames. And KTS algorithm is used to get the change points. The detailed preprocessing algorithms and processes can be understood by referring to the code.
+The original datasets are preprocessed. The codes for both TVSum and SumMe are given in *tvsum_md.py* and *summe_md.py* files respectively. The videos are uniformly downsampled to 320 frames. And KTS algorithm is used to get the change points. The detailed preprocessing algorithms and processes can be understood by referring to the code. You can download the original datasets from the internet and run these files to get the preprocessed datasets. Make sure you have the preprocessed datasets (h5 files) before you train the models.
 
 ## Model
 
