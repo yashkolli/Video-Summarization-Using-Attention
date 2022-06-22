@@ -12,29 +12,41 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--h5_path', type=str,
                     help='path to hdf5 file that contains information of a dataset.', default='tvsum.h5')
 parser.add_argument('-j', '--json_path', type=str,
-                    help='path to json file that stores pred score output by model, it should be saved in score_dir.', default='score_dir/epoch-4.json')
+                    help='path to json file that stores pred score output by model, it should be saved in score_dir.', default='score_dir_tvsum/epoch-4.json')
 parser.add_argument('-r', '--data_root', type=str,
                     help='path to directory of original dataset.', default='ydata-tvsum50-v1_1')
 parser.add_argument('-s', '--save_dir', type=str,
-                    help='path to directory where generating results should be saved.', default='Results')
+                    help='path to directory where generating results should be saved.', default='Results_tvsum')
+parser.add_argument('-d', '--dataset', type=str,
+                    help='which dataset videos you want to summarize?', default='tvsum')
 
 args = parser.parse_args()
 h5_path = args.h5_path
 json_path = args.json_path
 data_root = args.data_root
 save_dir = args.save_dir
+dataset = args.dataset.lower()
 
-video_dir = os.path.join(data_root, 'ydata-tvsum50-video', 'video')
+if dataset == 'tvsum':
+    video_dir = os.path.join(data_root, 'ydata-tvsum50-video', 'video')
+    matlab_path = os.path.join(
+        data_root, 'ydata-tvsum50-matlab', 'matlab', 'ydata-tvsum50.mat')
+    d = mat73.loadmat(matlab_path)
+    map_dict = {}
+    for i in range(len(d['tvsum50']['video'])):
+        map_dict[i+1] = d['tvsum50']['video'][i]
+else:
+    video_dir = os.path.join(data_root, 'videos')
+    matlab_path = os.path.join(data_root, 'GT')
+    map_dict = {}
+    i = 0
+    for filename in os.listdir(matlab_path):
+        map_dict[i+1] = filename[:-4]
+        i += 1
 f_data = h5py.File(h5_path)
 with open(json_path) as f:
     json_dict = json.load(f)
     ids = json_dict.keys()
-matlab_path = os.path.join(
-    data_root, 'ydata-tvsum50-matlab', 'matlab', 'ydata-tvsum50.mat')
-d = mat73.loadmat(matlab_path)
-map_dict = {}
-for i in range(len(d['tvsum50']['video'])):
-    map_dict[i+1] = d['tvsum50']['video'][i]
 
 
 def get_keys(id):

@@ -10,7 +10,6 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.layers import LSTM, Bidirectional, Dense, TimeDistributed, Concatenate, Lambda
 from tensorflow.keras import Input, Model
 
-from data_loader import get_loader
 from bahdanau_attention import BahdanauAttention
 from luong_attention import LuongAttention
 import eval
