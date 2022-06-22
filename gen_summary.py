@@ -35,7 +35,8 @@ if dataset == 'tvsum':
     map_dict = {}
     for i in range(len(d['tvsum50']['video'])):
         map_dict[i+1] = d['tvsum50']['video'][i]
-else:
+        
+elif dataset == 'summe':
     video_dir = os.path.join(data_root, 'videos')
     matlab_path = os.path.join(data_root, 'GT')
     map_dict = {}

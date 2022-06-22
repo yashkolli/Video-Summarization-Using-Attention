@@ -429,7 +429,8 @@ class BuildModel():
             data_path = self.config.data_path_tvsum
             test_dataset = self.test_dataset_tvsum
             score_dir = self.config.score_dir_tvsum
-        else:
+            
+        elif dataset == 'summe':
             data_path = self.config.data_path_summe
             test_dataset = self.test_dataset_summe
             score_dir = self.config.score_dir_summe

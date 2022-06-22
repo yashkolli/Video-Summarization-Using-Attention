@@ -49,5 +49,5 @@ Accordingly comment and uncomment the lines of code.
 
 To generate the summary of a video, run
 ```
-python gen_summary.py --h5_path --json_path --data_root --save_dir 
+python gen_summary.py --h5_path --json_path --data_root --save_dir --dataset
 ```
