@@ -8,7 +8,15 @@ This implementation considers Video Summarization as a _supervised subset select
 
 ## Dataset Preprocessing
 
-The original datasets are preprocessed. The codes for both TVSum and SumMe are given in *tvsum_md.py* and *summe_md.py* files respectively. The videos are uniformly downsampled to 320 frames. And KTS algorithm is used to get the change points. The detailed preprocessing algorithms and processes can be understood by referring to the code. You can download the original datasets from the internet and run these files to get the preprocessed datasets. Make sure you have the preprocessed datasets (h5 files) before you train the models.
+There are a certain preprocessing steps that the datasets have to undergo for them to be of use to us. The codes for both TVSum and SumMe datasets are given in *tvsum_md.py* and *summe_md.py* files respectively.
+<br><br>
+The videos are uniformly downsampled to 320 frames. And KTS algorithm is used to get the change points. The detailed preprocessing algorithms and processes can be understood by referring to the code. You can download the original datasets from the internet and run these files to get the preprocessed datasets.
+<br><br>
+Make sure you have the preprocessed datasets (h5 files) before you train the models.
+
+Given here are the links to the preprocessed datasets (in case you want to skip the preprocessing steps and directly want to train the model): <br>
+* [TVSum](https://drive.google.com/file/d/1SfImsAvUpT_HsiqdEmeyYipQUnFFlDbV/view?usp=sharing)
+* [SumMe](https://drive.google.com/file/d/1RxMuH40RYIHeOqQ32b9owWyY9FCYYk4C/view?usp=sharing)
 
 ## Model
 
@@ -18,7 +26,7 @@ More details of the model can be known by skimming through the code. There are d
 
 ## Training the model
 
-Modify the config file with the path of the dataset. And run,
+Before training the model, make sure you have the preprocessed datasets with you. Modify the config file with the path of the preprocessed datasets. And run,<br>
 `
 python train.py
 `
