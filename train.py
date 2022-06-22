@@ -10,8 +10,8 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.layers import LSTM, Bidirectional, Dense, TimeDistributed, Concatenate, Lambda
 from tensorflow.keras import Input, Model
 
-from bahdanau_attention import BahdanauAttention
-from luong_attention import LuongAttention
+from attention_layers.bahdanau_attention import BahdanauAttention
+from attention_layers.luong_attention import LuongAttention
 import eval
 
 
@@ -429,7 +429,7 @@ class BuildModel():
             data_path = self.config.data_path_tvsum
             test_dataset = self.test_dataset_tvsum
             score_dir = self.config.score_dir_tvsum
-            
+
         elif dataset == 'summe':
             data_path = self.config.data_path_summe
             test_dataset = self.test_dataset_summe
